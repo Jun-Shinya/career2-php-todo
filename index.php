@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
             <br><br>
             <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
-            <input class="btn btn-primary"  type="submit" name="btn" value="やることを作成">
+            <input class="btn btn-primary"  type="submit" name="btn" value="TODOを作成する">
         </form>
 
         <hr>
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2 class="text-muted py-3">やること一覧</h2>
         <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
             <input type="hidden" name="method" value="DELETE">
-            <button class="btn btn-danger" type="submit">やることを全削除</button>
+            <button class="btn btn-danger" type="submit">TODOを全削除する</button>
         </form>
         <?php
         $todo_list = $todo->getList();
@@ -67,25 +67,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             foreach ($todo_list as $todo) {
                 ?>
                 <tr>
-                    <td><?=$todo['title']; ?></td>
-                    <td><?=$todo['due_date']; ?></td>
-                    <td class="label">
-                        <label>
-                            <select name="status" class="form-control">
-                                <?php
-                                foreach (Todo::STATUS as $key => $label) {
-                                    $is_selected = $key === $todo["status"] ? "selected": "";
-                                    echo "<option value='$key' $is_selected>$label</option>";
-                                }
-                                ?>
-                            </select>
-                        </label>
-                    </td>
-                    <td>
-                        <input type="hidden" name="method" value="UPDATE">
-                        <input type="hidden" name="todo_id" value="<?=$todo["id"]; ?>">
-                        <button class="btn btn-primary" type="submit">変更</button>
-                    </td>
+                    <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
+                        <td><?=$todo['title']; ?></td>
+                        <td><?=$todo['due_date']; ?></td>
+                        <td class="label">
+                            <label>
+                                <select name="status" class="form-control">
+                                    <?php
+                                    foreach (Todo::STATUS as $key => $label) {
+                                        $is_selected = $key === $todo["status"] ? "selected": "";
+                                        echo "<option value='$key' $is_selected>$label</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </label>
+                        </td>
+                        <td>
+                            <input type="hidden" name="method" value="UPDATE">
+                            <input type="hidden" name="todo_id" value="<?=$todo["id"]; ?>">
+                            <button class="btn btn-primary" type="submit">変更</button>
+                        </td>
+                    </form>
                 </tr>
                 <?php
             }
@@ -94,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </table>
     </div>
 </div>
-<div></div>
+
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
