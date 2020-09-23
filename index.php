@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
-
 <!DOCTYPE>
 <html lang="ja">
 <head>
@@ -24,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>TODO App</title>
 </head>
 <body>
+
 <div class="container">
     <div class="col-md-8">
         <h1 class="text-center text-primary py-3">TODO App</h1>
@@ -69,7 +69,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <tr>
                     <td><?=$todo['title']; ?></td>
                     <td><?=$todo['due_date']; ?></td>
-                    <td><?=$todo['status_for_display']; ?></td>
+                    <td class="label">
+                        <label>
+                            <select name="status" class="form-control">
+                                <?php
+                                foreach (Todo::STATUS as $key => $label) {
+                                    $is_selected = $key === $todo["status"] ? "selected": "";
+                                    echo "<option value='$key' $is_selected>$label</option>";
+                                }
+                                ?>
+                            </select>
+                        </label>
+                    </td>
+                    <td>
+                        <input type="hidden" name="method" value="UPDATE">
+                        <input type="hidden" name="todo_id" value="<?=$todo["id"]; ?>">
+                        <button class="btn btn-primary" type="submit">変更</button>
+                    </td>
                 </tr>
                 <?php
             }
