@@ -4,9 +4,14 @@ require_once './todo.php';
 $todo = new Todo();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $todo->post($_POST['title'], $_POST['due_date']);
+    if (isset($_POST["method"]) && $_POST["method"] === "DELETE") {
+        $todo->delete();
+    } else {
+        $todo->post($_POST['title'], $_POST['due_date']);
+    }
 }
 ?>
+
 <!DOCTYPE>
 <html lang="ja">
 <head>
@@ -19,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>TODO App</title>
 </head>
 <body>
-
 <div class="container">
     <div class="col-md-8">
         <h1 class="text-center text-primary py-3">TODO App</h1>
@@ -55,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <th>タイトル</th>
                 <th>期限</th>
                 <th>状態</th>
+                <th>更新</th>
             </tr>
             </thead>
             <tbody>
