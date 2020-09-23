@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
             <br><br>
             <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
-            <input class="btn btn-primary"  type="submit" name="btn" value="TODOを作成する">
+            <input class="btn btn-primary"  type="submit" name="btn" value="やることを作成">
         </form>
 
         <hr>
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2 class="text-muted py-3">やること一覧</h2>
         <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
             <input type="hidden" name="method" value="DELETE">
-            <button class="btn btn-danger" type="submit">TODOを全削除する</button>
+            <button class="btn btn-danger" type="submit">やることを全削除</button>
         </form>
         <?php
         $todo_list = $todo->getList();
