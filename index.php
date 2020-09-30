@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <td>
                             <input type="hidden" name="method" value="UPDATE">
                             <input type="hidden" name="todo_id" value="<?=$todo["id"]; ?>">
-                            <button class="btn btn-primary" type="submit">削除</button>
+                            <button class="btn btn-danger" type="submit">削除</button>
                         </td>
                     </form>
                 </tr>
