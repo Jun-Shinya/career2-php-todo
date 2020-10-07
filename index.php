@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <thead>
             <tr>
                 <th>タイトル</th>
+                <th>アイコン</th>
                 <th>期限</th>
                 <th>状態</th>
                 <th>更新</th>
@@ -80,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <tr>
                     <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
                         <td><?=$todo['title']; ?></td>
+                        <td><?=$todo['image'];?></td>
                         <td><?=$todo['due_date']; ?></td>
                         <td class="label">
                             <label>
